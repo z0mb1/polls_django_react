@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block content %}
+    <div class="jumbotron">
+      <h1 class="display-4">Привет, интервьюируемый!</h1>
+      <p class="lead">Главная страница с какой то информацией</p>
+      <hr class="my-4">
+      <p>Какой нибудь текст</p>
+      <a class="btn btn-primary btn-lg" href="{% url 'polls:polls' %}" role="button">перейти к опросам</a>
+    </div>
+
+
+{% endblock %}
+
+        

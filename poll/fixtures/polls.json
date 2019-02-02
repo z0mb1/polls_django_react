@@ -1,0 +1,20 @@
+[
+    {
+        "model": "poll.poll",
+        "pk": 10,
+        "fields": {
+            "title": "first fixture",
+            "description": "trying rest framework",
+            "owner": 1
+        }
+    },
+    {
+        "model": "poll.poll",
+        "pk": 11,
+        "fields": {
+            "title": "second fixture",
+            "description": "trying rest framework",
+            "owner": 2
+        }
+    }
+]

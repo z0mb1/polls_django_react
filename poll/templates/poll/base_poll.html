@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+    
+    {% block script %}
+        {% block poll_script %} {% endblock poll_script %}
+    {% endblock script %}
+    {% block content %}
+    <div id="polls_container">
+        {% block poll_content %}
+            
+        {% endblock poll_content %}
+    </div>
+    {% endblock content %}
+

@@ -1,0 +1,39 @@
+{% extends "poll/base_poll.html" %}
+{% load static %}
+{% load poll_tags %}
+
+{% block poll_script %}
+    
+{% endblock poll_script %}
+
+{% block poll_content %}
+    {% for poll in polls %}
+        <div class='card poll_container'>
+              <div class="card-header">
+                {{ poll }} 
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ poll.date }}</h5>
+                <p class="card-text">{{ poll.description }}</p>
+                
+                <a href="{% url 'polls:poll' poll.pk %}" class='btn btn-primary 
+                    {% if poll.id|stringformat:"i" in finished_polls %}disabled{% endif %}' 
+                    role="button" 
+                    {% if poll.id|stringformat:"i" in finished_polls %}tabindex="-1" 
+                    aria-disabled="true"{% endif %}>пройти опрос</a>
+                {% if user.is_authenticated or poll.id|stringformat:"i" in finished_polls %}
+                <a href="{% url 'polls:poll_result' poll.pk %}" class='btn btn-primary' 
+                    role="button" >посмотреть результаты</a>
+                {% else %}
+                <a href="{% url 'polls:poll_result' poll.pk %}" class='btn btn-primary disabled' 
+                    role="button" 
+                    tabindex="-1" 
+                    aria-disabled="true">посмотреть результаты</a>
+                {% endif %}
+
+
+              </div>
+            
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "poll/base_poll.html" %}
+
+{% load poll_tags %}
+
+{% block poll_script %} {% endblock poll_script %}
+
+{% block poll_content %}
+
+
+<div class="poll_style">
+    {% for q in questions %}
+	<p class="title">{{ q.title }}</p>
+	<ul>
+		{% for i in q.items_set %}
+		<li>{{ i.value }}: <b>{% filter floatformat %}{% percentage q i %}{% endfilter %}%</b><br>
+			<div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="{% percentage q i %}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+		</li> 
+        
+		{% endfor %}
+	</ul>
+	<p>Total votes: <b>{{ q.get_vote_count }}</b></p><br>
+    {% endfor %}
+    <a href="{% url 'polls:polls' %}" class="btn btn-primary">Назад к опросам</a>
+</div>
+
+{% endblock poll_content %}

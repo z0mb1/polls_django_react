@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+
+/* color palette */
+@Dark-primary-color: #e64a19;
+@Light-primary-color: #ffccbc;
+@Primary-color: #ff5722;
+@Text-Icons: #FFFFFF;
+@Accent-color: #9e9e9e;
+@Primary-text: #212121;
+@Secondary-text: #757575;
+@Divider-color: rgba(0,0,0,.125);
+
+
+/* fonts */
+@text: 'Open Sans Condensed', sans-serif;
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    /*font-size: 62.5%; /* 16px*0.625 = 10px --for using rem */
+}
+
+body {
+    font-family: @text;
+    color: @Primary-text;
+}
+
+/* grid main */
+header { 
+    grid-area: header; 
+}
+
+main { 
+    grid-area: main; 
+}
+
+footer { 
+    grid-area: footer; 
+    background-color: @Divider-color;
+}
+
+.page {
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+      "header"
+      "main"
+      "footer";
+}
+/* grid main end */
+
+.left_menu {
+    background-color: @Light-primary-color;
+}
+
+/* bootstrap styles */
+.container {
+    max-width: None;
+}
+
+.row {
+    height: 100%;
+}
+
+
+/* bootstrap styles end */

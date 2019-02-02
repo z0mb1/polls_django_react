@@ -1,0 +1,67 @@
+{% extends "poll/base_poll.html" %}
+
+{% load static %}
+
+{% block poll_script %} {% endblock poll_script %}
+
+{% block poll_content %}
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    
+<div id="poll_container">
+    <div class="poll_style">
+        <h3>{{ poll.title }}</h3>
+        <div class="dropdown-divider"></div>
+        {% for q in questions %}
+        <div id='question_{{ q.pk }}'>
+            <form method="GET" action="." id="poll_form_{{ q.pk }}">
+                    <h4 class="">{{ q.title }}</h3>
+                    
+                    {% for i in q.items_set %}
+                    <div class="form-group form-check">
+                      <input class="form-check-input" type="radio" name="item" id="item_{{ i.id }}" value="{{ i.id }}" >
+                      <label class="form-check-label" for="item_{{ i.id }}">
+                        {{ i.value }}
+                      </label>
+                    </div>
+                    {% endfor %}
+                    
+                <!--p class="poll_send"><input type="button" id="poll_send_{{ q.pk }}" value="Vote" /></p-->
+            </form>
+        </div>
+        <div class="dropdown-divider"></div>
+        {% endfor %}
+        <input type="button" id="full_poll_send" value="Отправить ответы на все вопросы"/>
+        <script type="text/javascript">
+            //console.log({{ poll.pk }});
+            
+            document.addEventListener('DOMContentLoaded', function(){
+                var vote_url = '{% url "polls:poll_ajax_vote" poll.pk %}';
+                var result_url = '{% url "polls:poll_result" poll.pk %}';
+                //console.log(vote_url);
+                function showResults() {
+                    $.get(result_url, function(data) {
+                            //console.log(data);
+                            $("#poll_container").html(data);
+                        });
+                    }
+                $("#full_poll_send").click(function() {
+                        var answers = {}
+                        {% for q in questions %}
+                        answers['{{ q.id }}'] = $('#poll_form_{{ q.pk }} input[name=item]:checked').val();
+                        //console.log(answers);
+                        if (typeof $('#poll_form_{{ q.pk }} input[name=item]:checked').val() === "undefined") {
+                            alert("Please, select an answer");
+                            return false;
+                        }
+                        {% endfor %}
+                        
+                        $.get(vote_url, answers, function() {
+                            showResults();
+                        });
+                        return false;
+                    });
+                });
+        </script>
+    </div>
+</div>
+{% endblock poll_content %}
