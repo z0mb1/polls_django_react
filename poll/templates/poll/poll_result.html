@@ -14,7 +14,7 @@
 		{% for i in q.items_set %}
 		<li>{{ i.value }}: <b>{% filter floatformat %}{% percentage q i %}{% endfilter %}%</b><br>
 			<div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="{% percentage q i %}" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" style="width: {% percentage q i %}%" aria-valuenow="{% percentage q i %}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
 		</li> 
         
