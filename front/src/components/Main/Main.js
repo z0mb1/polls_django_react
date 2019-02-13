@@ -2,22 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import SideMenu from "../SideMenu";
 import NavBar from "../NavBar";
+import Card from "../Card";
 
 const drawerWidth = 200;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    height: "100vh",
+    width: "100vw"
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    backgroundColor: "#42a5f5"
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -72,7 +75,8 @@ const styles = theme => ({
 
 class Main extends React.Component {
   state = {
-    open: false
+    open: false,
+    quetions: []
   };
 
   handleDrawerOpen = () => {
@@ -83,6 +87,7 @@ class Main extends React.Component {
     this.setState({ open: false });
   };
 
+  componentDidMount() {}
   render() {
     const { classes, theme } = this.props;
     return (
@@ -101,11 +106,7 @@ class Main extends React.Component {
           theme={theme}
           isOpen={this.state.open}
         />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Typography paragraph>Lorem</Typography>
-          <Typography paragraph>Consequat</Typography>
-        </main>
+        <Card className={classes.content} />
       </div>
     );
   }
