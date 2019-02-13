@@ -11,7 +11,6 @@ const drawerWidth = 200;
 const styles = theme => ({
   root: {
     display: "flex",
-    height: "100vh",
     width: "100vw"
   },
   appBar: {
@@ -70,6 +69,12 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3
+  },
+  cardHolder: {
+    marginTop: "48px",
+    display: "flex",
+    flexDirection: "column",
+    width: "90%"
   }
 });
 
@@ -106,7 +111,12 @@ class Main extends React.Component {
           theme={theme}
           isOpen={this.state.open}
         />
-        <Card className={classes.content} />
+        <div className={classes.cardHolder}>
+          <Card className={classes.content} />
+          <Card className={classes.content} />
+          <Card className={classes.content} />
+          <Card className={classes.content} />
+        </div>
       </div>
     );
   }

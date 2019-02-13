@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 const styles = {
   card: {
     minWidth: "80%",
-    margin: "90px 8px 8px 60px",
+    margin: "24px 32px 8px 32px",
     padding: "16px"
   },
   bullet: {
