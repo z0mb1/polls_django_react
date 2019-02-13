@@ -42,7 +42,7 @@ const styles = {
 
 function SimpleCard(props) {
   const { classes } = props;
-
+  const answers = props.answers;
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -51,24 +51,23 @@ function SimpleCard(props) {
           color="textSecondary"
           gutterBottom
         >
-          Вопрос № ####
+          Вопрос № {props.number}
         </Typography>
         <Typography variant="h5" component="h2" className={classes.header}>
-          ####ЗАГОЛОВОК ВОПРОСА####
+          {props.name}
         </Typography>
         <div className={classes.btnHolder}>
-          <Button variant="contained" className={classes.button}>
-            ВАРИАНТ 1
-          </Button>
-          <Button variant="contained" className={classes.button}>
-            ВАРИАНТ 2
-          </Button>
-          <Button variant="contained" className={classes.button}>
-            ВАРИАНТ 3
-          </Button>
-          <Button variant="contained" className={classes.button}>
-            ВАРИАНТ 4
-          </Button>
+          {answers.map(ans => {
+            return (
+              <Button
+                variant="contained"
+                className={classes.button}
+                key={ans.id}
+              >
+                {ans.value}
+              </Button>
+            );
+          })}
         </div>
       </CardContent>
     </Card>

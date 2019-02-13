@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import SideMenu from "../SideMenu";
 import NavBar from "../NavBar";
 import Card from "../Card";
+import { GetQuestions, GetQuestionsMock } from "../../service/Api.js";
 
 const drawerWidth = 200;
 
@@ -81,7 +82,7 @@ const styles = theme => ({
 class Main extends React.Component {
   state = {
     open: false,
-    quetions: []
+    questions: []
   };
 
   handleDrawerOpen = () => {
@@ -92,7 +93,13 @@ class Main extends React.Component {
     this.setState({ open: false });
   };
 
-  componentDidMount() {}
+  getQuestions = async isMock => {
+    const quests = isMock ? await GetQuestionsMock() : await GetQuestions();
+    if (Array.isArray(quests)) this.setState({ questions: quests });
+  };
+  componentDidMount() {
+    this.getQuestions(true);
+  }
   render() {
     const { classes, theme } = this.props;
     return (
@@ -104,6 +111,7 @@ class Main extends React.Component {
           theme={theme}
           isOpen={this.state.open}
           title="Опросник"
+          onClickGetQuestions={() => this.getQuestions(false)}
         />
         <SideMenu
           handleDrawerClose={this.handleDrawerClose}
@@ -112,10 +120,17 @@ class Main extends React.Component {
           isOpen={this.state.open}
         />
         <div className={classes.cardHolder}>
-          <Card className={classes.content} />
-          <Card className={classes.content} />
-          <Card className={classes.content} />
-          <Card className={classes.content} />
+          {this.state.questions.map((card, i) => {
+            return (
+              <Card
+                name={card.title}
+                answers={card.items}
+                className={classes.content}
+                key={card.id}
+                number={i + 1}
+              />
+            );
+          })}
         </div>
       </div>
     );

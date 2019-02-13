@@ -29,7 +29,9 @@ const NavBar = props => {
         <Typography variant="h6" color="inherit" noWrap>
           {props.title}
         </Typography>
-        <Button color="inherit">Войти</Button>
+        <Button color="inherit" onClick={props.onClickGetQuestions}>
+          Попробовать получить реальные вопросы
+        </Button>
       </Toolbar>
     </AppBar>
   );
